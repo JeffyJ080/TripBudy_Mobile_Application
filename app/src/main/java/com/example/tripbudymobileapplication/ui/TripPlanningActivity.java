@@ -2,7 +2,9 @@ package com.example.tripbudymobileapplication.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import com.example.tripbudymobileapplication.R;
 public class TripPlanningActivity extends AppCompatActivity {
 
     private Button btnNext;
+    private Spinner spnCategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,18 @@ public class TripPlanningActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Spinner Code
+        spnCategories = findViewById(R.id.spinner2);
+        //Array Adapter
+        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.expenseCategories,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnCategories.setAdapter(adapter);
+
+        // Button Code
         btnNext = findViewById(R.id.btnNextPage);
 
         btnNext.setOnClickListener(v -> {
