@@ -33,6 +33,7 @@
         android:id="@+id/spinner2"
         android:layout_width="224dp"
         android:layout_height="60dp"
+        android:dropDownWidth="wrap_content"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
