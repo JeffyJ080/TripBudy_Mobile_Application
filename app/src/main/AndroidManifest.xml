@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TripBudyMobileApplication">
         <activity
+            android:name=".ui.RegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MemoryPostingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.BudgetingActivity"
             android:exported="false" />
         <activity
