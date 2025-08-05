@@ -8,7 +8,7 @@ This is the man things that I am hoping to learn from the project, the biggest t
 
 Listed below are the things that we were tasked to complete during the course of the project:
 
-- [ ] Designing and implementing model classes (User, Trip, Memory, etc.)
+- [x] Designing and implementing model classes (User, Trip, Memory, etc.)
 
 - [ ] Building Activities for trip planning, budgeting, and memory posting
 
