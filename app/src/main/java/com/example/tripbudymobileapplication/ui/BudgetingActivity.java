@@ -1,6 +1,8 @@
 package com.example.tripbudymobileapplication.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import com.example.tripbudymobileapplication.R;
 
 public class BudgetingActivity extends AppCompatActivity {
 
+    private Button btnBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +25,13 @@ public class BudgetingActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        btnBack = findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(BudgetingActivity.this, TripPlanningActivity.class);
+            startActivity(intent);
         });
     }
 }
