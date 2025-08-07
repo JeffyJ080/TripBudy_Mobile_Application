@@ -1,5 +1,6 @@
 package com.example.tripbudymobileapplication.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -24,6 +25,43 @@ public class MemoryPostingActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        // Nav bar code
+        btnHome = findViewById(R.id.btnHome);
+        btnTrips = findViewById(R.id.btnTrips);
+        btnAddMem = findViewById(R.id.btnNewMemory);
+        btnBudget = findViewById(R.id.btnBudget);
+        btnAccount = findViewById(R.id.btnAccount);
+
+        btnTrips.setOnClickListener(v -> {
+            Intent in = new Intent(this, TripPlanningActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+        });
+
+        btnHome.setOnClickListener(v -> {
+            Intent in = new Intent(this, DashboardActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+        });
+
+        btnAddMem.setOnClickListener(v -> {
+            Intent in = new Intent(this, MemoryPostingActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+        });
+
+        btnBudget.setOnClickListener(v -> {
+            Intent in = new Intent(this, BudgetingActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+        });
+
+        btnAccount.setOnClickListener(v -> {
+            Intent in = new Intent(this, RegistrationActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
         });
     }
 }

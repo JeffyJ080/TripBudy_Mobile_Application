@@ -82,6 +82,25 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             startActivity(in);
             overridePendingTransition(0, 0);
         });
+
+        btnAddMem.setOnClickListener(v -> {
+            Intent in = new Intent(this, MemoryPostingActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+        });
+
+        btnBudget.setOnClickListener(v -> {
+            Intent in = new Intent(this, BudgetingActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+        });
+
+        btnAccount.setOnClickListener(v -> {
+            Intent in = new Intent(this, RegistrationActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+        });
+
     }
 
     @Override
