@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
 
     private String exCat;
     private Button btnNext;
+    private ImageButton btnTrips, btnHome, btnAddMem, btnBudget, btnAccount;
     private Spinner spnCategories;
 
     @Override
@@ -60,6 +62,25 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         btnNext.setOnClickListener(v -> {
             Intent intent = new Intent(TripPlanningActivity.this, BudgetingActivity.class);
             startActivity(intent);
+        });
+
+        // Nav bar code
+        btnHome = findViewById(R.id.btnHome);
+        btnTrips = findViewById(R.id.btnTrips);
+        btnAddMem = findViewById(R.id.btnNewMemory);
+        btnBudget = findViewById(R.id.btnBudget);
+        btnAccount = findViewById(R.id.btnAccount);
+
+        btnTrips.setOnClickListener(v -> {
+            Intent in = new Intent(this, TripPlanningActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+        });
+
+        btnHome.setOnClickListener(v -> {
+            Intent in = new Intent(this, DashboardActivity.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
         });
     }
 

@@ -1,6 +1,7 @@
 package com.example.tripbudymobileapplication.ui;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tripbudymobileapplication.R;
 
 public class MemoryPostingActivity extends AppCompatActivity {
+
+    private ImageButton btnTrips, btnHome, btnAddMem, btnBudget, btnAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

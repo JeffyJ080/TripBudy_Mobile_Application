@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomNav"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
     android:elevation="4dp"
-    android:orientation="horizontal"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="horizontal">
 
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btnHome"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
@@ -20,11 +20,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.529"
         app:srcCompat="@drawable/baseline_home_24" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btnNewMemory"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:contentDescription="CreateMemory"
@@ -35,7 +34,7 @@
         app:srcCompat="@drawable/baseline_add_to_photos_24" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/btnAccount"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginEnd="16dp"
@@ -43,28 +42,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.529"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/outline_account_circle_24" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/btnBudget"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:contentDescription="Budget"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton6"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintEnd_toStartOf="@+id/btnAccount"
+        app:layout_constraintStart_toEndOf="@+id/btnNewMemory"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/outline_account_balance_wallet_24" />
 
     <ImageButton
-        android:id="@+id/imageButton8"
+        android:id="@+id/btnTrips"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:contentDescription="Trips"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
+        app:layout_constraintEnd_toStartOf="@+id/btnNewMemory"
+        app:layout_constraintStart_toEndOf="@+id/btnHome"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_flight_takeoff_24" />
 
