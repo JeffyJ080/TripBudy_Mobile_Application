@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#4DDC3D</color>  <!-- Your solid green -->
+    <color name="colorPrimaryVariant">#3AB82E</color>  <!-- Darker green for pressed states -->
+    <color name="colorSecondary">#FFC857</color>  <!-- Yellow accent -->
+    <color name="colorBackgroundLight">#FFFFFF</color>  <!-- Light background color -->
+    <color name="colorBackgroundDark">#121212</color>  <!-- Dark background color -->
+    <color name="textPrimary">#212121</color>  <!-- Dark gray text -->
+    <color name="textSecondary">#757575</color>  <!-- Lighter gray text -->
+    <color name="Error">#D32F2F</color>  <!-- Red error color -->
 </resources>
