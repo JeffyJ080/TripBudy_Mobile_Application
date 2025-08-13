@@ -135,7 +135,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         txtTotalExpenses = findViewById(R.id.txtTot);
     }
 
-    Double expenses = 0.00;
+    Double expenses = 0.0;
 
     public void createTrip(){
         // Trip Planning Code //
@@ -187,7 +187,9 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         // Expenses Input
         if (!edtExpenses.getText().toString().isEmpty()){
             try {
-                expenses = Double.parseDouble(edtExpenses.getText().toString());
+                if (expenses <= 0) {
+                    expenses = Double.parseDouble(edtExpenses.getText().toString());
+                }
             } catch (Exception e){
                 Toast.makeText(this, "Please enter an expense", Toast.LENGTH_LONG).show();
                 return;
@@ -259,7 +261,10 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
         exCat = arrTripType[pos];
-        act.add(exCat);
+
+        if (!exCat.equals("Choose activities") && !act.contains(exCat)){
+            act.add(exCat);
+        }
 
         for (String a :
                 act) {
@@ -280,6 +285,14 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
                     break;
             }
         }
+
+        if (!edtExpenses.getText().toString().isEmpty()) {
+            try {
+                expenses += Double.parseDouble(edtExpenses.getText().toString());
+            } catch (NumberFormatException ignored) {}
+        }
+
+        checkDiscountLive(expenses, 1);
     }
 
     @Override
