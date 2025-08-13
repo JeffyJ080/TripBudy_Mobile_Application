@@ -16,15 +16,133 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/spnVisitType"
-        android:layout_width="405dp"
+    <EditText
+        android:id="@+id/edtDestination"
+        android:layout_width="280dp"
         android:layout_height="50dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        android:ems="10"
+        android:hint="Enter Destination"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/edtNotes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="Enter Start Date"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDate2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnVisitType" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="Enter Custom Expenses"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/spnVisitType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNotes" />
+
+    <Spinner
+        android:id="@+id/spnVisitType"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+
+    <EditText
+        android:id="@+id/editTextDate2"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="Enter End Date"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/btnSaveTrip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+    <EditText
+        android:id="@+id/edtNotes"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="Enter Note"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtDestination" />
+
+    <Button
+        android:id="@+id/btnSaveTrip"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Save Trip"
+        app:layout_constraintBottom_toTopOf="@+id/txtSubTot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate2" />
+
+    <TextView
+        android:id="@+id/txtSubTot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sub Total: "
+        app:layout_constraintBottom_toTopOf="@+id/txtDiscount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSaveTrip" />
+
+    <TextView
+        android:id="@+id/txtTot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total:"
+        app:layout_constraintBottom_toTopOf="@+id/btnConfirmTrip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDiscount" />
+
+
+    <TextView
+        android:id="@+id/txtDiscount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discount Applied:"
+        app:layout_constraintBottom_toTopOf="@+id/txtTot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSubTot" />
+
+    <Button
+        android:id="@+id/btnConfirmTrip"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Confirm Trip"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTot" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
