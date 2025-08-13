@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +24,8 @@ import com.example.tripbudymobileapplication.model.Trip;
 import com.example.tripbudymobileapplication.model.User;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripPlanningActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -35,6 +38,8 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             
     };
 
+    private ArrayList<String> act = new ArrayList<String>();
+
     private String exCat;
     private Button btnSaveTrip;
     private ImageButton btnTrips, btnHome, btnAddMem, btnBudget, btnAccount;
@@ -44,6 +49,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
     private EditText edtDestination;
     private EditText edtNotes;
     private EditText edtExpenses;
+    private TextView txtExpenses, txtDiscount, txtTotalExpenses;
     private Trip trip;
 
     @Override
@@ -116,11 +122,17 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             Trip.saveTrip(trip);
         });
 
+        // Edit Code
         edtExpenses = findViewById(R.id.editTextNumber);
         edtNotes = findViewById(R.id.edtNotes);
         edtDestination = findViewById(R.id.edtDestination);
         edtStartDate = findViewById(R.id.editTextDate);
         edtEndDate = findViewById(R.id.editTextDate2);
+
+        // TextView Code
+        txtExpenses = findViewById(R.id.txtSubTot);
+        txtDiscount = findViewById(R.id.txtDiscount);
+        txtTotalExpenses = findViewById(R.id.txtTot);
     }
 
     Double expenses = 0.00;
@@ -143,7 +155,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             try {
                 startDate = Date.valueOf(sD);
             } catch (Exception e) {
-                Toast.makeText(this, "Enter a valid format: yyyy-mm-dd", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Enter a valid format: yyyy/mm/dd", Toast.LENGTH_LONG).show();
             }
         }else{
             Toast.makeText(this, "Please enter a Start Date", Toast.LENGTH_LONG).show();
@@ -158,7 +170,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             try{
                 endDate = Date.valueOf(eD);
             } catch (Exception e) {
-                Toast.makeText(this, "Enter a valid format: yyyy-mm-dd", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Enter a valid format: yyyy/mm/dd", Toast.LENGTH_LONG).show();
             }
         } else{
             Toast.makeText(this, "Please enter an End Date", Toast.LENGTH_LONG).show();
@@ -204,6 +216,9 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             if (u.getUserID() == ID){
                 if (u.getTotalTrips() >= 3) {
                     totExpense = Expense * 0.10;
+                    updateText(Expense, totExpense, true);
+                } else{
+                    updateText(Expense, totExpense, false);
                 }
             }
         }
@@ -211,26 +226,59 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         return totExpense;
     }
 
+    public void checkDiscountLive(Double Expense, Integer ID){
+        Double totExpense = Expense;
+
+        for (User u:
+                arrUsers) {
+            if (u.getUserID() == ID && u.getTotalTrips() >= 3) {
+                totExpense = Expense * 0.90;
+                updateText(Expense, totExpense, true);
+            }
+        }
+
+        updateText(Expense, totExpense, false);
+    }
+
+    private void updateText(Double Ex, Double finEx, Boolean Discount){
+        txtExpenses.setText("Subtotal: R" + Ex.toString());
+        txtTotalExpenses.setText("Total: R" + finEx.toString());
+
+        if (Discount){
+            txtDiscount.setText("Discount: 10%");
+        } else{
+            txtDiscount.setText("Discount: Not Applied");
+        }
+    }
+
+    private void updateText(Double Ex, Double finEx){
+        txtExpenses.setText("Subtotal: R" + Ex);
+        txtTotalExpenses.setText("Total: R" + finEx);
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
         exCat = arrTripType[pos];
-//        Toast.makeText(this, exCat, Toast.LENGTH_SHORT).show();
+        act.add(exCat);
 
-        switch (pos){
-            case 2:
-                expenses += 400;
-                break;
-            case 3:
-                expenses += 700;
-                break;
-            case 4:
-                expenses += 1200;
-                break;
-            case 5:
-                expenses += 1500;
-                break;
-            default:
-                break;
+        for (String a :
+                act) {
+            switch (a) {
+                case "sightseeing":
+                    expenses += 400;
+                    break;
+                case "hiking":
+                    expenses += 600;
+                    break;
+                case "dining":
+                    expenses += 900;
+                    break;
+                case "museum tours":
+                    expenses += 1500;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
