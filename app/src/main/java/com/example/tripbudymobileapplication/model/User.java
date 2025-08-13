@@ -4,12 +4,14 @@ public class User {
     private final Integer userID;
     private String userName;
     private String userEmail;
+    private Integer totalTrips;
 
     // Constructor class to initialise the User object
-    public User (Integer ID, String Name, String Email){
+    public User (Integer ID, String Name, String Email, Integer totalTrips){
         this.userID = ID;
         this.userName = Name;
         this.userEmail = Email;
+        this.totalTrips = totalTrips;
     }
 
     // Getter methods to access the private fields
@@ -24,6 +26,10 @@ public class User {
 
     public String getUserName() {
         return userName;
+    }
+
+    public Integer getTotalTrips(){
+        return totalTrips;
     }
 
     // Setter methods to modify the private fields (Specifically username and email)

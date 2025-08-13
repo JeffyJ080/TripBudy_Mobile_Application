@@ -20,14 +20,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.model.Trip;
+import com.example.tripbudymobileapplication.model.User;
 
 import java.sql.Date;
 
 public class TripPlanningActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private String[] arrTripType = {
+            "Choose activities",
             "sightseeing", "hiking",
             "dining", "museum tours"
+    };
+    private User[] arrUsers ={
+            
     };
 
     private String exCat;
@@ -131,15 +136,31 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         }
 
         // Start Date Input
-        String startDate = edtStartDate.getText().toString();
-        if (startDate.isEmpty()){
+        String sD = edtStartDate.getText().toString();
+        Date startDate = null;
+
+        if (!edtStartDate.getText().toString().isEmpty()){
+            try {
+                startDate = Date.valueOf(sD);
+            } catch (Exception e) {
+                Toast.makeText(this, "Enter a valid format: yyyy-mm-dd", Toast.LENGTH_LONG).show();
+            }
+        }else{
             Toast.makeText(this, "Please enter a Start Date", Toast.LENGTH_LONG).show();
             return;
         }
 
         // End Date Input
-        String endDate = edtEndDate.getText().toString();
-        if (endDate.isEmpty()){
+        String eD = edtEndDate.getText().toString();
+        Date endDate = null;
+
+        if (!edtEndDate.getText().toString().isEmpty()) {
+            try{
+                endDate = Date.valueOf(eD);
+            } catch (Exception e) {
+                Toast.makeText(this, "Enter a valid format: yyyy-mm-dd", Toast.LENGTH_LONG).show();
+            }
+        } else{
             Toast.makeText(this, "Please enter an End Date", Toast.LENGTH_LONG).show();
             return;
         }
@@ -155,9 +176,8 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         if (!edtExpenses.getText().toString().isEmpty()){
             try {
                 expenses = Double.parseDouble(edtExpenses.getText().toString());
-            }
-            catch (Exception e){
-                Toast.makeText(this, "Please enter a expense", Toast.LENGTH_LONG).show();
+            } catch (Exception e){
+                Toast.makeText(this, "Please enter an expense", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -165,11 +185,30 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
                 Toast.makeText(this, "Please enter a positive expense", Toast.LENGTH_LONG).show();
                 return;
             }
+        } else{
+            Toast.makeText(this, "Please enter an expense", Toast.LENGTH_LONG).show();
+            return;
         }
 
+        Double totalExpenses = checkDiscount(expenses, 1);
+
         // Trip Creation
-        // TODO: Fix the date conversion error
-        trip = new Trip(1, destination, Date.valueOf(startDate), Date.valueOf(endDate), notes, expenses, 1);
+        trip = new Trip(1, destination, startDate, endDate, notes, totalExpenses, 1);
+    }
+
+    public Double checkDiscount(Double Expense, Integer ID){
+        Double totExpense = Expense;
+
+        for (User u:
+             arrUsers) {
+            if (u.getUserID() == ID){
+                if (u.getTotalTrips() >= 3) {
+                    totExpense = Expense * 0.10;
+                }
+            }
+        }
+
+        return totExpense;
     }
 
     @Override
@@ -178,16 +217,16 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
 //        Toast.makeText(this, exCat, Toast.LENGTH_SHORT).show();
 
         switch (pos){
-            case 1:
+            case 2:
                 expenses += 400;
                 break;
-            case 2:
+            case 3:
                 expenses += 700;
                 break;
-            case 3:
+            case 4:
                 expenses += 1200;
                 break;
-            case 4:
+            case 5:
                 expenses += 1500;
                 break;
             default:
