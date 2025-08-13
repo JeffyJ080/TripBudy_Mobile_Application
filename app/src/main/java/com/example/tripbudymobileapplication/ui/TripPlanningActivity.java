@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
+import com.example.tripbudymobileapplication.model.Trip;
+
+import java.sql.Date;
 
 public class TripPlanningActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -28,7 +31,9 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
     private String exCat;
     private Button btnSaveTrip;
     private ImageButton btnTrips, btnHome, btnAddMem, btnBudget, btnAccount;
-    private Spinner spnCategories;
+    private Spinner spnTripType;
+
+    private Trip trip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +47,10 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         });
 
         // Spinner Code
-        spnCategories = findViewById(R.id.spnVisitType);
-        spnCategories.setOnItemSelectedListener(this);
+        spnTripType = findViewById(R.id.spnVisitType);
+        spnTripType.setOnItemSelectedListener(this);
 
-        //Array Adapter
+        //Array Adapter: this populated the spinner
         ArrayAdapter <String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -53,7 +58,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnCategories.setAdapter(adapter);
+        spnTripType.setAdapter(adapter);
 
         // Nav bar code
         btnHome = findViewById(R.id.btnHome);
@@ -91,13 +96,48 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             startActivity(in);
             overridePendingTransition(0, 0);
         });
+
+        // Save Trip Button
+        btnSaveTrip = findViewById(R.id.btnSaveTrip);
+
+        btnSaveTrip.setOnClickListener(v -> {
+            createTrip();
+            Trip.saveTrip(trip);
+        });
+    }
+
+    public void createTrip(){
+        // Trip Planning Code //
+
+        // Destination Input
+        EditText edtDestination = findViewById(R.id.edtDestination);
+        String destination = edtDestination.getText().toString();
+
+        // Start Date Input
+        EditText edtStartDate = findViewById(R.id.editTextDate);
+        String startDate = edtStartDate.getText().toString();
+
+        // End Date Input
+        EditText edtEndDate = findViewById(R.id.editTextDate2);
+        String endDate = edtEndDate.getText().toString();
+
+        // Notes Input
+        EditText edtNotes = findViewById(R.id.edtNotes);
+        String notes = edtNotes.getText().toString();
+
+        // Expenses Input
+        EditText edtExpenses = findViewById(R.id.editTextNumber);
+        String expense = edtExpenses.getText().toString();
+        Double expenses = Double.valueOf(expense);
+
+        // Trip Creation
+        trip = new Trip(1, destination, Date.valueOf(startDate), Date.valueOf(endDate), notes, expenses, 1);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
-//        Toast.makeText(getApplicationContext(), exCategories[pos], Toast.LENGTH_SHORT).show();
         exCat = arrTripType[pos];
-        Toast.makeText(this, exCat, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, exCat, Toast.LENGTH_SHORT).show();
     }
 
     @Override

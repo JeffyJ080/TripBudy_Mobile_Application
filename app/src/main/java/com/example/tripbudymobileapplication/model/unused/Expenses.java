@@ -1,4 +1,4 @@
-package com.example.tripbudymobileapplication.model;
+package com.example.tripbudymobileapplication.model.unused;
 
 import java.sql.Date;
 

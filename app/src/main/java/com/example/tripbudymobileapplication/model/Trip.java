@@ -9,15 +9,17 @@ public class Trip {
     private Date tripEndDate;
     private String tripNotes;
     private final Integer userID;
+    private Double Expenses;
 
     // Constructor class to initialise the Trip object
-    public Trip (Integer tripID, String Destination, Date startDate, Date endDate, String Notes, Integer userID){
+    public Trip (Integer tripID, String Destination, Date startDate, Date endDate, String Notes, Double Expenses,Integer userID){
         this.tripID = tripID;
         this.tripDestination = Destination;
         this.tripStartDate = startDate;
         this.tripEndDate = endDate;
         this.tripNotes = Notes;
         this.userID = userID;
+        this.Expenses = Expenses;
     }
 
     // Getter methods to access the private fields
@@ -65,6 +67,9 @@ public class Trip {
     }
 
     // Functions and methods to this class alone
+    public static void saveTrip(Trip t){
+        // TODO: Save trip to database
 
+    }
 
 }
