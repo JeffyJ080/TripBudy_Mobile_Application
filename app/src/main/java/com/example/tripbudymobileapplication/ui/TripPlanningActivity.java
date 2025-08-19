@@ -101,7 +101,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         });
 
         btnBudget.setOnClickListener(v -> {
-            Intent in = new Intent(this, BudgetingActivity.class);
+            Intent in = new Intent(this, GalleryActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
         });

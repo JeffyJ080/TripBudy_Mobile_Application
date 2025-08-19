@@ -1,6 +1,7 @@
 package com.example.tripbudymobileapplication.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,16 +14,18 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 
-public class BudgetingActivity extends AppCompatActivity {
+import java.io.File;
+
+public class GalleryActivity extends AppCompatActivity {
 
     private Button btnBack;
-    private ImageButton btnTrips, btnHome, btnAddMem, btnBudget, btnAccount;
+    private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_budgeting);
+        setContentView(R.layout.activity_gallery);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -32,7 +35,7 @@ public class BudgetingActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
 
         btnBack.setOnClickListener(v -> {
-            Intent intent = new Intent(BudgetingActivity.this, TripPlanningActivity.class);
+            Intent intent = new Intent(GalleryActivity.this, TripPlanningActivity.class);
             startActivity(intent);
         });
 
@@ -40,7 +43,7 @@ public class BudgetingActivity extends AppCompatActivity {
         btnHome = findViewById(R.id.btnHome);
         btnTrips = findViewById(R.id.btnTrips);
         btnAddMem = findViewById(R.id.btnNewMemory);
-        btnBudget = findViewById(R.id.btnBudget);
+        btnViewMemory = findViewById(R.id.btnViewMem);
         btnAccount = findViewById(R.id.btnAccount);
 
         btnTrips.setOnClickListener(v -> {
@@ -61,8 +64,8 @@ public class BudgetingActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         });
 
-        btnBudget.setOnClickListener(v -> {
-            Intent in = new Intent(this, BudgetingActivity.class);
+        btnViewMemory.setOnClickListener(v -> {
+            Intent in = new Intent(this, GalleryActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
         });
@@ -72,5 +75,7 @@ public class BudgetingActivity extends AppCompatActivity {
             startActivity(in);
             overridePendingTransition(0, 0);
         });
+
+
     }
 }

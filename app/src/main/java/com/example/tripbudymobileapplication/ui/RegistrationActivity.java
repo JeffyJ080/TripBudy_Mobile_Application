@@ -53,7 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
         btnBudget.setOnClickListener(v -> {
-            Intent in = new Intent(this, BudgetingActivity.class);
+            Intent in = new Intent(this, GalleryActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
         });

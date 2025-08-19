@@ -29,7 +29,7 @@ import java.io.File;
 
 public class MemoryPostingActivity extends AppCompatActivity {
 
-    private ImageButton btnTrips, btnHome, btnAddMem, btnBudget, btnAccount;
+    private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
     private ActivityResultLauncher<Intent> pickImageLauncher;
 
     @Override
@@ -47,7 +47,7 @@ public class MemoryPostingActivity extends AppCompatActivity {
         btnHome = findViewById(R.id.btnHome);
         btnTrips = findViewById(R.id.btnTrips);
         btnAddMem = findViewById(R.id.btnNewMemory);
-        btnBudget = findViewById(R.id.btnViewMem);
+        btnViewMemory = findViewById(R.id.btnViewMem);
         btnAccount = findViewById(R.id.btnAccount);
 
         btnTrips.setOnClickListener(v -> {
@@ -68,8 +68,8 @@ public class MemoryPostingActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         });
 
-        btnBudget.setOnClickListener(v -> {
-            Intent in = new Intent(this, BudgetingActivity.class);
+        btnViewMemory.setOnClickListener(v -> {
+            Intent in = new Intent(this, GalleryActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
         });
