@@ -1,4 +1,4 @@
-package com.example.tripbudymobileapplication.ui;
+package com.example.tripbudymobileapplication.model.unused;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
+import com.example.tripbudymobileapplication.ui.DashboardActivity;
+import com.example.tripbudymobileapplication.ui.MemoryPostingActivity;
+import com.example.tripbudymobileapplication.ui.RegistrationActivity;
+import com.example.tripbudymobileapplication.ui.TripPlanningActivity;
 
 public class BudgetingActivity extends AppCompatActivity {
 

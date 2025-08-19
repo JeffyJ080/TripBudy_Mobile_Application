@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
+import com.example.tripbudymobileapplication.model.unused.BudgetingActivity;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -31,26 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
         btnHome = findViewById(R.id.btnHome);
         btnTrips = findViewById(R.id.btnTrips);
         btnAddMem = findViewById(R.id.btnNewMemory);
-        btnBudget = findViewById(R.id.btnBudget);
-        btnAccount = findViewById(R.id.btnAccount);
-
-        btnTrips.setOnClickListener(v -> {
-            Intent in = new Intent(this, TripPlanningActivity.class);
-            startActivity(in);
-            overridePendingTransition(0, 0);
-        });
-
-        btnHome.setOnClickListener(v -> {
-            Intent in = new Intent(this, DashboardActivity.class);
-            startActivity(in);
-            overridePendingTransition(0, 0);
-        });
-
-        // Nav bar code
-        btnHome = findViewById(R.id.btnHome);
-        btnTrips = findViewById(R.id.btnTrips);
-        btnAddMem = findViewById(R.id.btnNewMemory);
-        btnBudget = findViewById(R.id.btnBudget);
+        btnBudget = findViewById(R.id.btnViewMem);
         btnAccount = findViewById(R.id.btnAccount);
 
         btnTrips.setOnClickListener(v -> {

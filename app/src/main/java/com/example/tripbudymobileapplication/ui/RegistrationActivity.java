@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
+import com.example.tripbudymobileapplication.model.unused.BudgetingActivity;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -31,7 +32,7 @@ public class RegistrationActivity extends AppCompatActivity {
         btnHome = findViewById(R.id.btnHome);
         btnTrips = findViewById(R.id.btnTrips);
         btnAddMem = findViewById(R.id.btnNewMemory);
-        btnBudget = findViewById(R.id.btnBudget);
+        btnBudget = findViewById(R.id.btnViewMem);
         btnAccount = findViewById(R.id.btnAccount);
 
         btnTrips.setOnClickListener(v -> {

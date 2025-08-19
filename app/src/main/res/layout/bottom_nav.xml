@@ -45,10 +45,10 @@
         app:srcCompat="@drawable/outline_account_circle_24" />
 
     <ImageButton
-        android:id="@+id/btnBudget"
+        android:id="@+id/btnViewMem"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:contentDescription="Budget"
+        android:contentDescription="View Memories"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAccount"
         app:layout_constraintStart_toEndOf="@+id/btnNewMemory"

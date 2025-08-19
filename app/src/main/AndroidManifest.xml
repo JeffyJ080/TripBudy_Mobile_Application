@@ -30,9 +30,6 @@
             android:name=".ui.MemoryPostingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.BudgetingActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.TripPlanningActivity"
             android:exported="false" />
     </application>

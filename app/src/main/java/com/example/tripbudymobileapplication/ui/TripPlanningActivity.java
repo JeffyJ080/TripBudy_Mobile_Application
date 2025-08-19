@@ -2,7 +2,6 @@ package com.example.tripbudymobileapplication.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,10 +21,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.model.Trip;
 import com.example.tripbudymobileapplication.model.User;
+import com.example.tripbudymobileapplication.model.unused.BudgetingActivity;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TripPlanningActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -81,7 +80,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         btnHome = findViewById(R.id.btnHome);
         btnTrips = findViewById(R.id.btnTrips);
         btnAddMem = findViewById(R.id.btnNewMemory);
-        btnBudget = findViewById(R.id.btnBudget);
+        btnBudget = findViewById(R.id.btnViewMem);
         btnAccount = findViewById(R.id.btnAccount);
 
         btnTrips.setOnClickListener(v -> {
