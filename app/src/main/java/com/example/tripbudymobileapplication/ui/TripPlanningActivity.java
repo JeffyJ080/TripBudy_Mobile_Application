@@ -119,6 +119,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
 
         btnSaveTrip.setOnClickListener(v -> {
             createTrip();
+            btnSaveTrip.setVisibility(View.VISIBLE);
             Trip.saveTrip(trip);
         });
 
