@@ -1,18 +1,18 @@
 package com.example.tripbudymobileapplication.model;
 
-import java.sql.Date;
-
 public class Memory {
     private Integer memoryID;
     private String caption;
     private String imgPath = "memories/uuid.jpg";
+    private String mp3Path = "music/uuid.mp3";
     private final Long datePosted;
 
     // Constructor class to initialise the Memory object
-    public Memory(String caption, String imgPath, Long datePosted){
+    public Memory(String caption, String imgPath, String mp3Path, Long datePosted){
         this.caption = caption;
         this.imgPath = imgPath;
         this.datePosted = datePosted;
+        this.mp3Path = mp3Path;
     }
 
     // Getter methods to access the private fields

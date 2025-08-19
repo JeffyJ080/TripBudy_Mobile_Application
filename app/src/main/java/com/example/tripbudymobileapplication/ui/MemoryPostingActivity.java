@@ -110,6 +110,7 @@ public class MemoryPostingActivity extends AppCompatActivity {
             Memory memory = new Memory(
                     text
                     ,selectedImagePath
+                    ,"selectedMP3Path" // TODO: You know...
                     ,System.currentTimeMillis()
             );
 
@@ -119,6 +120,19 @@ public class MemoryPostingActivity extends AppCompatActivity {
             finish();
         });
     }
+
+//    public void openSoundPicker(){
+//        // Sound picker code
+//        Intent intent = new Intent(ACTION_OPEN_DOCUMENT);
+//        intent.addCategory(Intent.CATEGORY_OPENABLE);
+//        intent.setType("")
+//    }
+//
+//    String selectedMP3Path;
+//
+//    private void handlePickedSound(Uri uri){
+//
+//    }
 
     public void openImagePicker(){
         // Image Picker code
