@@ -21,7 +21,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.model.Trip;
 import com.example.tripbudymobileapplication.model.User;
-import com.example.tripbudymobileapplication.model.unused.BudgetingActivity;
 
 import java.sql.Date;
 import java.util.ArrayList;

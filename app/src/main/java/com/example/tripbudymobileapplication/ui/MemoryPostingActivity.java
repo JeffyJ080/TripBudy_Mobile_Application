@@ -23,7 +23,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.model.Memory;
-import com.example.tripbudymobileapplication.model.unused.BudgetingActivity;
 import com.example.tripbudymobileapplication.utils.FileHelper;
 
 import java.io.File;
