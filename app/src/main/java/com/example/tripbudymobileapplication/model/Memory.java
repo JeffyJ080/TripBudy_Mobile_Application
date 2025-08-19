@@ -3,16 +3,13 @@ package com.example.tripbudymobileapplication.model;
 import java.sql.Date;
 
 public class Memory {
-    private final Integer memoryID;
-    private final Integer tripID;
+    private Integer memoryID;
     private String caption;
-    private String imgPath;
-    private final Date datePosted;
+    private String imgPath = "memories/uuid.jpg";
+    private final Long datePosted;
 
     // Constructor class to initialise the Memory object
-    public Memory(Integer memoryID, Integer tripID, String caption, String imgPath, Date datePosted){
-        this.memoryID = memoryID;
-        this.tripID = tripID;
+    public Memory(String caption, String imgPath, Long datePosted){
         this.caption = caption;
         this.imgPath = imgPath;
         this.datePosted = datePosted;
@@ -24,10 +21,6 @@ public class Memory {
         return memoryID;
     }
 
-    public Integer getTripID() {
-        return tripID;
-    }
-
     public String getCaption() {
         return caption;
     }
@@ -36,7 +29,7 @@ public class Memory {
         return imgPath;
     }
 
-    public Date getDatePosted() {
+    public Long getDatePosted() {
         return datePosted;
     }
 

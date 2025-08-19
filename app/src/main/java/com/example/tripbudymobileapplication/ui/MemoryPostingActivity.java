@@ -1,26 +1,37 @@
 package com.example.tripbudymobileapplication.ui;
 
+import static android.content.Intent.ACTION_OPEN_DOCUMENT;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.PickVisualMediaRequest;
-import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
+import com.example.tripbudymobileapplication.model.Memory;
 import com.example.tripbudymobileapplication.model.unused.BudgetingActivity;
+import com.example.tripbudymobileapplication.utils.FileHelper;
+
+import java.io.File;
 
 public class MemoryPostingActivity extends AppCompatActivity {
 
     private ImageButton btnTrips, btnHome, btnAddMem, btnBudget, btnAccount;
+    private ActivityResultLauncher<Intent> pickImageLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,24 +81,67 @@ public class MemoryPostingActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         });
 
+        pickImageLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri uri = result.getData().getData();
+                        handlePickedImage(uri);
+                    }
+                }
+        );
+
         Button btnAddImage, btnSaveMemory;
 
         btnAddImage = findViewById(R.id.btnAddImage);
         btnAddImage.setOnClickListener(v -> openImagePicker());
+
+        btnSaveMemory = findViewById(R.id.btnSaveMem);
+        btnSaveMemory.setOnClickListener(v -> {
+
+            EditText edtMemory = findViewById(R.id.edtMemory);
+            String text = edtMemory.getText().toString();
+
+            if (text.isEmpty() || selectedImagePath == null){
+                Toast.makeText(this, "Add text and image", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Memory memory = new Memory(
+                    text
+                    ,selectedImagePath
+                    ,System.currentTimeMillis()
+            );
+
+            // TODO: Add Database code here
+
+            Toast.makeText(this, "Memory Saved!", Toast.LENGTH_SHORT).show();
+            finish();
+        });
     }
 
     public void openImagePicker(){
-        ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
-                registerForActivityResult(new PickVisualMedia(), uri -> {
-                    if (uri != null){
-                        Log.d("PhotoPicker", "Selected URI: " + uri);
-                    } else{
-                        Log.d("Photo Picker", "No Media Selected");
-                    }
-                });
+        // Image Picker code
+        Intent intent = new Intent(ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*"); // Any Image file
 
-        pickMedia.launch(new PickVisualMediaRequest.Builder()
-                .setMediaType(PickVisualMedia.ImageOnly.INSTANCE)
-                .build());
+        pickImageLauncher.launch(intent);
+    }
+
+    String selectedImagePath;
+
+    private void handlePickedImage(Uri uri) {
+        String relativePath = FileHelper.saveImageFromUri(this, uri);
+        if (relativePath != null) {
+            // Save path temporarily (until user saves memory)
+            selectedImagePath = relativePath;
+
+            ImageView preview = findViewById(R.id.imageView);
+            File file = new File(getFilesDir(), relativePath);
+
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            preview.setImageBitmap(bitmap);
+        }
     }
 }
