@@ -25,7 +25,6 @@ import com.example.tripbudymobileapplication.database.dao.TripDao;
 import com.example.tripbudymobileapplication.database.model.Trip;
 import com.example.tripbudymobileapplication.database.model.User;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 public class TripPlanningActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {

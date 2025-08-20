@@ -20,6 +20,7 @@ public class UserDao {
         db = dbHelper.getWritableDatabase();
     }
 
+    // Never used since there is no create user function
     public User insertUser(User u){
         ContentValues values = new ContentValues();
         values.put("username", u.getUserName());
