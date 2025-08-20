@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnTrips"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBudget"
+        app:layout_constraintTop_toBottomOf="@+id/btnViewMem"
         app:srcCompat="@drawable/baseline_add_to_photos_24" />
 
     <ImageButton
@@ -40,14 +40,14 @@
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:contentDescription="Profile"
-        app:layout_constraintBottom_toTopOf="@+id/btnBudget"
+        app:layout_constraintBottom_toTopOf="@+id/btnViewMem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_account_circle_24" />
 
     <ImageButton
-        android:id="@+id/btnBudget"
+        android:id="@+id/btnViewMem"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:contentDescription="Budget"

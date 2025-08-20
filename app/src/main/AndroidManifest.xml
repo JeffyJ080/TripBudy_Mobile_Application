@@ -33,6 +33,9 @@
         <activity
             android:name=".ui.TripPlanningActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.GalleryActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -18,7 +18,6 @@ import java.io.File;
 
 public class GalleryActivity extends AppCompatActivity {
 
-    private Button btnBack;
     private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
 
     @Override
@@ -30,13 +29,6 @@ public class GalleryActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-        });
-
-        btnBack = findViewById(R.id.btnBack);
-
-        btnBack.setOnClickListener(v -> {
-            Intent intent = new Intent(GalleryActivity.this, TripPlanningActivity.class);
-            startActivity(intent);
         });
 
         // Nav bar code
@@ -75,6 +67,7 @@ public class GalleryActivity extends AppCompatActivity {
             startActivity(in);
             overridePendingTransition(0, 0);
         });
+
 
     }
 }
