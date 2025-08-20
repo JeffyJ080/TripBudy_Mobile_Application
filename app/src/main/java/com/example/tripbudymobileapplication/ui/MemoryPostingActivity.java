@@ -208,4 +208,15 @@ public class MemoryPostingActivity extends AppCompatActivity {
             preview.setImageBitmap(bitmap);
         }
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+
+        BackgroundMusicManager.stop();
+    }
 }

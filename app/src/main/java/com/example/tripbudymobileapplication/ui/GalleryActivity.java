@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.model.Memory;
+import com.example.tripbudymobileapplication.utils.BackgroundMusicManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -85,6 +86,9 @@ public class GalleryActivity extends AppCompatActivity {
             finish();
         });
 
+        // Background music to play
+        BackgroundMusicManager.play(this);
+
         // Populate memories
         // TODO: Database code here
 
@@ -140,5 +144,11 @@ public class GalleryActivity extends AppCompatActivity {
             // Add container to galleryGrid
             galleryGrid.addView(container);
         }
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        BackgroundMusicManager.stop();
     }
 }

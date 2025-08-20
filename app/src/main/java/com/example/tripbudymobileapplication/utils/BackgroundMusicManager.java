@@ -11,8 +11,6 @@ public class BackgroundMusicManager {
     private static MediaPlayer mediaPlayer;
 
     public static void play(Context context){
-        mediaPlayer.stop(); // stop if already playing
-
         mediaPlayer = MediaPlayer.create(context, R.raw.background);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
