@@ -1,6 +1,7 @@
 package com.example.tripbudymobileapplication.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,6 +50,8 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
     private EditText edtExpenses;
     private TextView txtExpenses, txtDiscount, txtTotalExpenses;
     private Trip trip;
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +119,8 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             overridePendingTransition(0, 0);
             finish();
         });
+
+        sharedPreferences = getSharedPreferences("userdata", MODE_PRIVATE);
 
         // Save Trip Button
         btnSaveTrip = findViewById(R.id.btnSaveTrip);
@@ -211,22 +216,31 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         Double totalExpenses = checkDiscount(expenses, 1);
 
         // Trip Creation
-        trip = new Trip(1, destination, startDate, endDate, notes, totalExpenses, 1);
+        trip = new Trip(1, destination, startDate, endDate, notes, totalExpenses);
     }
 
     public Double checkDiscount(Double Expense, Integer ID){
         Double totExpense = Expense;
 
-        for (User u:
-             arrUsers) {
-            if (u.getUserID() == ID){
-                if (u.getTotalTrips() >= 3) {
-                    totExpense = Expense * 0.10;
-                    updateText(Expense, totExpense, true);
-                } else{
-                    updateText(Expense, totExpense, false);
-                }
-            }
+//        for (User u:
+//             arrUsers) {
+//            if (u.getUserID() == ID){
+//                if (u.getTotalTrips() >= 3) {
+//                    totExpense = Expense * 0.10;
+//                    updateText(Expense, totExpense, true);
+//                } else{
+//                    updateText(Expense, totExpense, false);
+//                }
+//            }
+//        }
+
+        Integer totaltrips = sharedPreferences.getInt("trips", 0);
+
+        if (totaltrips >= 3) {
+            totExpense = Expense * 0.90;
+            updateText(Expense, totExpense, true);
+        } else{
+            updateText(Expense, totExpense, false);
         }
 
         return totExpense;
@@ -235,12 +249,19 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
     public void checkDiscountLive(Double Expense, Integer ID){
         Double totExpense = Expense;
 
-        for (User u:
-                arrUsers) {
-            if (u.getUserID() == ID && u.getTotalTrips() >= 3) {
-                totExpense = Expense * 0.90;
-                updateText(Expense, totExpense, true);
-            }
+//        for (User u:
+//                arrUsers) {
+//            if (u.getUserID() == ID && u.getTotalTrips() >= 3) {
+//                totExpense = Expense * 0.90;
+//                updateText(Expense, totExpense, true);
+//            }
+//        }
+
+        Integer totaltrips = sharedPreferences.getInt("trips", 0);
+
+        if (totaltrips >= 3) {
+            totExpense = Expense * 0.90;
+            updateText(Expense, totExpense, true);
         }
 
         updateText(Expense, totExpense, false);

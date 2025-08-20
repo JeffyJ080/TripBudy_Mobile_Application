@@ -1,7 +1,6 @@
 package com.example.tripbudymobileapplication.model;
 
 public class Memory {
-    private Integer memoryID;
     private String caption;
     private String imgPath = "memories/uuid.jpg";
     private String mp3Path = "music/uuid.mp3";
@@ -13,13 +12,10 @@ public class Memory {
         this.imgPath = imgPath;
         this.datePosted = datePosted;
         this.mp3Path = mp3Path;
+
     }
 
     // Getter methods to access the private fields
-
-    public Integer getMemoryID() {
-        return memoryID;
-    }
 
     public String getCaption() {
         return caption;

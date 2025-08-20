@@ -8,17 +8,15 @@ public class Trip {
     private Date tripStartDate;
     private Date tripEndDate;
     private String tripNotes;
-    private final Integer userID;
     private Double Expenses;
 
     // Constructor class to initialise the Trip object
-    public Trip (Integer tripID, String Destination, Date startDate, Date endDate, String Notes, Double Expenses,Integer userID){
+    public Trip (Integer tripID, String Destination, Date startDate, Date endDate, String Notes, Double Expenses){
         this.tripID = tripID;
         this.tripDestination = Destination;
         this.tripStartDate = startDate;
         this.tripEndDate = endDate;
         this.tripNotes = Notes;
-        this.userID = userID;
         this.Expenses = Expenses;
     }
 
@@ -42,10 +40,6 @@ public class Trip {
 
     public String getTripNotes() {
         return tripNotes;
-    }
-
-    public Integer getUserID() {
-        return userID;
     }
 
     // Setter methods to modify the private fields (Specifically notes , start, end, and destination)

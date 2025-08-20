@@ -114,8 +114,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("username", username);
                 editor.putString("email", email);
-                editor.putInt("id", 1); // TODO: Database code
                 editor.putBoolean("loggedin", true);
+                editor.putInt("trips", 1); // TODO: Database Code
                 editor.apply();
 
                 btnHome.callOnClick();

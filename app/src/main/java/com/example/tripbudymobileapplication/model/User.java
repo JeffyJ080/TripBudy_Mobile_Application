@@ -1,24 +1,18 @@
 package com.example.tripbudymobileapplication.model;
 
 public class User {
-    private final Integer userID;
     private String userName;
     private String userEmail;
     private Integer totalTrips;
 
     // Constructor class to initialise the User object
-    public User (Integer ID, String Name, String Email, Integer totalTrips){
-        this.userID = ID;
+    public User (String Name, String Email, Integer totalTrips){
         this.userName = Name;
         this.userEmail = Email;
         this.totalTrips = totalTrips;
     }
 
     // Getter methods to access the private fields
-
-    public Integer getUserID() {
-        return userID;
-    }
 
     public String getUserEmail() {
         return userEmail;
