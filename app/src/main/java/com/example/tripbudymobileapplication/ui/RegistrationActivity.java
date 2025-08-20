@@ -117,6 +117,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 editor.putInt("id", 1); // TODO: Database code
                 editor.putBoolean("loggedin", true);
                 editor.apply();
+
+                btnHome.callOnClick();
             });
         } else{
             // Activity setup
@@ -138,6 +140,8 @@ public class RegistrationActivity extends AppCompatActivity {
             editor.clear();
             editor.putBoolean("loggedin", false);
             editor.apply();
+
+            btnHome.callOnClick();
         }
     }
 }
