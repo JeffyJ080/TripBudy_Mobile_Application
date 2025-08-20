@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.tripbudymobileapplication.database.DatabaseHelper;
 import com.example.tripbudymobileapplication.database.model.Trip;
-import com.example.tripbudymobileapplication.database.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
