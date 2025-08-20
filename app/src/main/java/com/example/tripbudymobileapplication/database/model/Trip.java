@@ -1,9 +1,9 @@
-package com.example.tripbudymobileapplication.model;
+package com.example.tripbudymobileapplication.database.model;
 
 import java.sql.Date;
 
 public class Trip {
-    private final Integer tripID;
+    private Integer tripID;
     private String tripDestination;
     private Date tripStartDate;
     private Date tripEndDate;
@@ -11,8 +11,7 @@ public class Trip {
     private Double Expenses;
 
     // Constructor class to initialise the Trip object
-    public Trip (Integer tripID, String Destination, Date startDate, Date endDate, String Notes, Double Expenses){
-        this.tripID = tripID;
+    public Trip (String Destination, Date startDate, Date endDate, String Notes, Double Expenses){
         this.tripDestination = Destination;
         this.tripStartDate = startDate;
         this.tripEndDate = endDate;

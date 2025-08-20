@@ -1,4 +1,4 @@
-package com.example.tripbudymobileapplication.model;
+package com.example.tripbudymobileapplication.database.model;
 
 public class Memory {
     private String caption;

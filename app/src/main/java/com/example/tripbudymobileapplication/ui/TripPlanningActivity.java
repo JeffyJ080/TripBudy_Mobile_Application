@@ -20,8 +20,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
-import com.example.tripbudymobileapplication.model.Trip;
-import com.example.tripbudymobileapplication.model.User;
+import com.example.tripbudymobileapplication.database.DatabaseHelper;
+import com.example.tripbudymobileapplication.database.model.Trip;
+import com.example.tripbudymobileapplication.database.model.User;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -131,6 +132,9 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             Trip.saveTrip(trip);
         });
 
+        // Database setup
+        DatabaseHelper.getInstance(this);
+
         // Edit Code
         edtExpenses = findViewById(R.id.editTextNumber);
         edtNotes = findViewById(R.id.edtNotes);
@@ -216,7 +220,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         Double totalExpenses = checkDiscount(expenses, 1);
 
         // Trip Creation
-        trip = new Trip(1, destination, startDate, endDate, notes, totalExpenses);
+        trip = new Trip(destination, startDate, endDate, notes, totalExpenses);
     }
 
     public Double checkDiscount(Double Expense, Integer ID){

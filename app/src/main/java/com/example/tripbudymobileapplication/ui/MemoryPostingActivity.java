@@ -23,7 +23,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
-import com.example.tripbudymobileapplication.model.Memory;
+import com.example.tripbudymobileapplication.database.DatabaseHelper;
+import com.example.tripbudymobileapplication.database.model.Memory;
 import com.example.tripbudymobileapplication.utils.BackgroundMusicManager;
 import com.example.tripbudymobileapplication.utils.FileHelper;
 
@@ -89,6 +90,9 @@ public class MemoryPostingActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
             finish();
         });
+
+        // Database setup
+        DatabaseHelper.getInstance(this);
 
         pickImageLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),

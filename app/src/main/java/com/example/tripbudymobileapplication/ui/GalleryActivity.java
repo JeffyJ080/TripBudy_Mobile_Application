@@ -3,11 +3,9 @@ package com.example.tripbudymobileapplication.ui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,12 +18,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
-import com.example.tripbudymobileapplication.model.Memory;
+import com.example.tripbudymobileapplication.database.DatabaseHelper;
+import com.example.tripbudymobileapplication.database.model.Memory;
 import com.example.tripbudymobileapplication.utils.BackgroundMusicManager;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import androidx.gridlayout.widget.GridLayout;
 
 public class GalleryActivity extends AppCompatActivity {
@@ -85,6 +83,9 @@ public class GalleryActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
             finish();
         });
+
+        // Database setup
+        DatabaseHelper.getInstance(this);
 
         // Background music to play
         BackgroundMusicManager.play(this);

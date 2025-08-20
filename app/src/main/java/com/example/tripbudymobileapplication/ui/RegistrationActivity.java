@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
+import com.example.tripbudymobileapplication.database.DatabaseHelper;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     String email, username;
     private TextView txt1, txt2;
+    private Integer trips;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,9 @@ public class RegistrationActivity extends AppCompatActivity {
         txt1 = findViewById(R.id.textView);
         txt2 = findViewById(R.id.textView2);
 
+        // Database setup
+        DatabaseHelper.getInstance(this);
+
         // Login code
         Button btnLogin = findViewById(R.id.btnLogin);
         EditText edtUsername = findViewById(R.id.edtUsername);
@@ -115,7 +120,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 editor.putString("username", username);
                 editor.putString("email", email);
                 editor.putBoolean("loggedin", true);
-                editor.putInt("trips", 1); // TODO: Database Code
+                editor.putInt("trips", trips); // TODO: Database Code
                 editor.apply();
 
                 btnHome.callOnClick();
