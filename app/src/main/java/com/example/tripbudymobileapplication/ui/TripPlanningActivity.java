@@ -40,7 +40,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
 
     private String exCat;
     private Button btnSaveTrip;
-    private ImageButton btnTrips, btnHome, btnAddMem, btnBudget, btnAccount;
+    private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
     private Spinner spnTripType;
     private EditText edtEndDate;
     private EditText edtStartDate;
@@ -79,37 +79,42 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         btnHome = findViewById(R.id.btnHome);
         btnTrips = findViewById(R.id.btnTrips);
         btnAddMem = findViewById(R.id.btnNewMemory);
-        btnBudget = findViewById(R.id.btnViewMem);
+        btnViewMemory = findViewById(R.id.btnViewMem);
         btnAccount = findViewById(R.id.btnAccount);
 
         btnTrips.setOnClickListener(v -> {
             Intent in = new Intent(this, TripPlanningActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnHome.setOnClickListener(v -> {
             Intent in = new Intent(this, DashboardActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnAddMem.setOnClickListener(v -> {
             Intent in = new Intent(this, MemoryPostingActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
-        btnBudget.setOnClickListener(v -> {
+        btnViewMemory.setOnClickListener(v -> {
             Intent in = new Intent(this, GalleryActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnAccount.setOnClickListener(v -> {
             Intent in = new Intent(this, RegistrationActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         // Save Trip Button
