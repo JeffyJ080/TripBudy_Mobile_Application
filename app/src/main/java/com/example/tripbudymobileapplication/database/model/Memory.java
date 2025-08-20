@@ -42,8 +42,4 @@ public class Memory {
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
-
-    // Functions and Methods for this class alone
-
-
 }

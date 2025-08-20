@@ -1,5 +1,9 @@
 package com.example.tripbudymobileapplication.database.model;
 
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.tripbudymobileapplication.database.DatabaseHelper;
+
 import java.sql.Date;
 
 public class Trip {
@@ -58,11 +62,4 @@ public class Trip {
     public void setTripNotes(String tripNotes) {
         this.tripNotes = tripNotes;
     }
-
-    // Functions and methods to this class alone
-    public static void saveTrip(Trip t){
-        // TODO: Save trip to database
-
-    }
-
 }

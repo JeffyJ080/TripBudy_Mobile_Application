@@ -35,8 +35,4 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    // Functions and Methods for this class alone
-
-
 }
