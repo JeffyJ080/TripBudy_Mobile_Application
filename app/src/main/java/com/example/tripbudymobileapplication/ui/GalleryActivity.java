@@ -76,6 +76,5 @@ public class GalleryActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         });
 
-
     }
 }
