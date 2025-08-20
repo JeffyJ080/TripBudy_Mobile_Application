@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.database.DatabaseHelper;
 import com.example.tripbudymobileapplication.database.dao.TripDao;
+import com.example.tripbudymobileapplication.database.dao.UserDao;
 import com.example.tripbudymobileapplication.database.model.Trip;
 import com.example.tripbudymobileapplication.database.model.User;
 
@@ -33,9 +34,6 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             "Choose activities",
             "sightseeing", "hiking",
             "dining", "museum tours"
-    };
-    private User[] arrUsers ={
-            
     };
 
     private ArrayList<String> act = new ArrayList<String>();
@@ -51,8 +49,8 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
     private EditText edtExpenses;
     private TextView txtExpenses, txtDiscount, txtTotalExpenses;
     private Trip trip;
-
     private SharedPreferences sharedPreferences;
+    Integer totaltrips;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +128,9 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             createTrip();
             btnSaveTrip.setVisibility(View.VISIBLE);
             TripDao tripDao = new TripDao(this);
-            Trip savedTrip = tripDao.insertTrip(trip);
+            tripDao.insertTrip(trip);
+            UserDao userDao = new UserDao(this);
+            userDao.updateTrips(sharedPreferences.getString("email", "email"), totaltrips);
         });
 
         // Database setup
@@ -218,28 +218,17 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
             return;
         }
 
-        Double totalExpenses = checkDiscount(expenses, 1);
+        Double totalExpenses = checkDiscount(expenses);
 
         // Trip Creation
         trip = new Trip(destination, startDate, endDate, notes, totalExpenses);
     }
 
-    public Double checkDiscount(Double Expense, Integer ID){
+    public Double checkDiscount(Double Expense){
         Double totExpense = Expense;
 
-//        for (User u:
-//             arrUsers) {
-//            if (u.getUserID() == ID){
-//                if (u.getTotalTrips() >= 3) {
-//                    totExpense = Expense * 0.10;
-//                    updateText(Expense, totExpense, true);
-//                } else{
-//                    updateText(Expense, totExpense, false);
-//                }
-//            }
-//        }
-
-        Integer totaltrips = sharedPreferences.getInt("trips", 0);
+        totaltrips = sharedPreferences.getInt("trips", 0);
+        totaltrips += 1;
 
         if (totaltrips >= 3) {
             totExpense = Expense * 0.90;
@@ -254,15 +243,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
     public void checkDiscountLive(Double Expense, Integer ID){
         Double totExpense = Expense;
 
-//        for (User u:
-//                arrUsers) {
-//            if (u.getUserID() == ID && u.getTotalTrips() >= 3) {
-//                totExpense = Expense * 0.90;
-//                updateText(Expense, totExpense, true);
-//            }
-//        }
-
-        Integer totaltrips = sharedPreferences.getInt("trips", 0);
+        totaltrips = sharedPreferences.getInt("trips", 0);
 
         if (totaltrips >= 3) {
             totExpense = Expense * 0.90;

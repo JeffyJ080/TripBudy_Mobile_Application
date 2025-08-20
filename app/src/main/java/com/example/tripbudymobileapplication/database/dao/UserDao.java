@@ -31,6 +31,14 @@ public class UserDao {
         return u;
     }
 
+    public void updateTrips(String email, Integer trips){
+        ContentValues values = new ContentValues();
+
+        values.put("trips", trips);
+        db.update("users", values, "email=?", new String[]{email});
+        db.close();
+    }
+
     public List<User> getALlUsers(){
         List<User> users = new ArrayList<>();
         Cursor cursor = db.query("users", null, null, null, null, null, null);

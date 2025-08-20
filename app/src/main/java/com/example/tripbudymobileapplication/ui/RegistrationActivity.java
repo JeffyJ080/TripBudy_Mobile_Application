@@ -149,6 +149,23 @@ public class RegistrationActivity extends AppCompatActivity {
             txt1.setVisibility(View.INVISIBLE);
             txt2.setVisibility(View.INVISIBLE);
 
+            // Database code
+            List<User> users;
+            UserDao userDao = new UserDao(this);
+            users = userDao.getALlUsers();
+
+            for (User u :
+                    users) {
+                if (u.getUserEmail() == sharedPreferences.getString("email", "email")) {
+                    trips = u.getTotalTrips();
+                }
+            }
+
+            // Shared Preferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("trips", trips);
+            editor.apply();
+
             // Actual logout logic
             btnLogin.setText("Logout");
             btnLogin.setOnClickListener(v -> logout());
