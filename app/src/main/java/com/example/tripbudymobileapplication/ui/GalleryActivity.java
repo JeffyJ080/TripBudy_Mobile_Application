@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +24,7 @@ import com.example.tripbudymobileapplication.model.Memory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import androidx.gridlayout.widget.GridLayout;
 
 public class GalleryActivity extends AppCompatActivity {
 

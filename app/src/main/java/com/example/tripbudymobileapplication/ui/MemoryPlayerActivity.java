@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ import java.io.IOException;
 public class MemoryPlayerActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
+    private Boolean isPlaying = true;
+    private ImageButton playPauseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class MemoryPlayerActivity extends AppCompatActivity {
 
         ImageView fullScreenImage = findViewById(R.id.fullScreenImage);
         TextView memoryCaption = findViewById(R.id.memoryCaption);
+        playPauseButton = findViewById(R.id.btnMediaControl);
 
         // Get data from intent
         String imgPath = getIntent().getStringExtra("imgPath");
@@ -60,6 +64,20 @@ public class MemoryPlayerActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Pause/Play toggle
+        playPauseButton.setOnClickListener(v -> {
+            if (mediaPlayer != null){
+                if (isPlaying){
+                    mediaPlayer.pause();
+                    playPauseButton.setImageResource(R.drawable.media_player_play);
+                } else{
+                    mediaPlayer.start();
+                    playPauseButton.setImageResource(R.drawable.media_player_pause);
+                }
+                isPlaying = !isPlaying;
+            }
+        });
 
         // Close on image tap
         fullScreenImage.setOnClickListener(v -> finish());
