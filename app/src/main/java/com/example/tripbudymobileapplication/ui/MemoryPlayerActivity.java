@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
+import com.example.tripbudymobileapplication.utils.BackgroundMusicManager;
 
 import java.io.IOException;
 
@@ -38,6 +39,9 @@ public class MemoryPlayerActivity extends AppCompatActivity {
         ImageView fullScreenImage = findViewById(R.id.fullScreenImage);
         TextView memoryCaption = findViewById(R.id.memoryCaption);
         playPauseButton = findViewById(R.id.btnMediaControl);
+
+        // Handle background music
+        BackgroundMusicManager.pause();
 
         // Get data from intent
         String imgPath = getIntent().getStringExtra("imgPath");
@@ -90,5 +94,7 @@ public class MemoryPlayerActivity extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+
+        BackgroundMusicManager.resume();
     }
 }

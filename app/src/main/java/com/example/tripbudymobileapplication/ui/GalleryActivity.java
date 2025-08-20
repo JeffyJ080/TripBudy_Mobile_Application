@@ -3,6 +3,7 @@ package com.example.tripbudymobileapplication.ui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -53,30 +54,35 @@ public class GalleryActivity extends AppCompatActivity {
             Intent in = new Intent(this, TripPlanningActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnHome.setOnClickListener(v -> {
             Intent in = new Intent(this, DashboardActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnAddMem.setOnClickListener(v -> {
             Intent in = new Intent(this, MemoryPostingActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnViewMemory.setOnClickListener(v -> {
             Intent in = new Intent(this, GalleryActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnAccount.setOnClickListener(v -> {
             Intent in = new Intent(this, RegistrationActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         // Populate memories

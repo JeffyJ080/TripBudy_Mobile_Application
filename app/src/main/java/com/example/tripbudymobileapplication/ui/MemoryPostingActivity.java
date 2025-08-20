@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.model.Memory;
+import com.example.tripbudymobileapplication.utils.BackgroundMusicManager;
 import com.example.tripbudymobileapplication.utils.FileHelper;
 
 import java.io.File;
@@ -33,6 +34,8 @@ public class MemoryPostingActivity extends AppCompatActivity {
     private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
     private ActivityResultLauncher<Intent> pickImageLauncher;
     private ActivityResultLauncher<Intent> pickMusicLauncher;
+    private MediaPlayer mediaPlayer;
+    private Boolean isPlaying = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,30 +59,35 @@ public class MemoryPostingActivity extends AppCompatActivity {
             Intent in = new Intent(this, TripPlanningActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnHome.setOnClickListener(v -> {
             Intent in = new Intent(this, DashboardActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnAddMem.setOnClickListener(v -> {
             Intent in = new Intent(this, MemoryPostingActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnViewMemory.setOnClickListener(v -> {
             Intent in = new Intent(this, GalleryActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         btnAccount.setOnClickListener(v -> {
             Intent in = new Intent(this, RegistrationActivity.class);
             startActivity(in);
             overridePendingTransition(0, 0);
+            finish();
         });
 
         pickImageLauncher = registerForActivityResult(
@@ -89,13 +97,24 @@ public class MemoryPostingActivity extends AppCompatActivity {
                         Uri uri = result.getData().getData();
                         handlePickedImage(uri);
                     }
-                }
-        );
+                });
 
-        Button btnAddImage, btnSaveMemory;
+        pickMusicLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null){
+                        Uri uri = result.getData().getData();
+                        handlePickedSound(uri);
+                    }
+                });
+
+        Button btnAddImage, btnSaveMemory, btnAddMusic;
 
         btnAddImage = findViewById(R.id.btnAddImage);
         btnAddImage.setOnClickListener(v -> openImagePicker());
+
+        btnAddMusic = findViewById(R.id.btnAddMusic);
+        btnAddMusic.setOnClickListener(v -> openSoundPicker());
 
         btnSaveMemory = findViewById(R.id.btnSaveMem);
         btnSaveMemory.setOnClickListener(v -> {
@@ -105,11 +124,6 @@ public class MemoryPostingActivity extends AppCompatActivity {
 
             if (text.isEmpty() || selectedImagePath == null){
                 Toast.makeText(this, "Add text and image", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (selectedMP3Path == null){
-                Toast.makeText(this, "Add a sound file", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -124,6 +138,26 @@ public class MemoryPostingActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Memory Saved!", Toast.LENGTH_SHORT).show();
             finish();
+        });
+
+        // Play music
+        BackgroundMusicManager.play(this);
+
+        ImageButton btnPlayPause;
+        btnPlayPause = findViewById(R.id.btnPausePlay);
+        btnPlayPause.setOnClickListener(v -> {
+            if (mediaPlayer != null){
+                if (isPlaying){
+                    mediaPlayer.pause();
+                    btnPlayPause.setImageResource(R.drawable.media_player_play);
+                    BackgroundMusicManager.resume();
+                } else{
+                    mediaPlayer.start();
+                    btnPlayPause.setImageResource(R.drawable.media_player_pause);
+                    BackgroundMusicManager.pause();
+                }
+                isPlaying = !isPlaying;
+            }
         });
     }
 
@@ -144,7 +178,8 @@ public class MemoryPostingActivity extends AppCompatActivity {
             selectedMP3Path = relativePath;
 
             File file = new File(getFilesDir(), relativePath);
-            MediaPlayer mediaPlayer = MediaPlayer.create(this, Uri.fromFile(file));
+            mediaPlayer = MediaPlayer.create(this, Uri.fromFile(file));
+            BackgroundMusicManager.pause();
             mediaPlayer.start();
         }
     }

@@ -7,6 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.MemoryPostingActivity">
 
+    <Button
+        android:id="@+id/btnAddMusic2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Music"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.612"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/btnPausePlay" />
+
+    <ImageButton
+        android:id="@+id/btnPausePlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Pause/Play music"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/media_player_pause" />
+
     <include
         android:id="@+id/bottomNav"
         layout="@layout/bottom_nav"
