@@ -18,6 +18,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.database.DatabaseHelper;
+import com.example.tripbudymobileapplication.database.dao.UserDao;
+import com.example.tripbudymobileapplication.database.model.User;
+
+import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -116,11 +120,24 @@ public class RegistrationActivity extends AppCompatActivity {
                     username = edtUsername.getText().toString();
                 }
 
+                //Database code
+                List<User> users;
+                UserDao userDao = new UserDao(this);
+                users = userDao.getALlUsers();
+
+                for (User u :
+                        users) {
+                    if (u.getUserEmail() == edtEmail.getText().toString()) {
+                        trips = u.getTotalTrips();
+                    }
+                }
+
+                // Shared Preference
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("username", username);
                 editor.putString("email", email);
                 editor.putBoolean("loggedin", true);
-                editor.putInt("trips", trips); // TODO: Database Code
+                editor.putInt("trips", trips);
                 editor.apply();
 
                 btnHome.callOnClick();

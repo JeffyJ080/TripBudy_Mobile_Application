@@ -19,7 +19,7 @@ public class TripDao {
         db = dbHelper.getWritableDatabase();
     }
 
-    public static Trip insertTrip(Trip t){
+    public Trip insertTrip(Trip t){
         ContentValues values = new ContentValues();
         values.put("destination", t.getTripDestination());
         values.put("startdate", t.getTripStartDate());
@@ -31,7 +31,7 @@ public class TripDao {
         return t;
     }
 
-    public static List<Trip> getAllTrips(){
+    public List<Trip> getAllTrips(){
         List<Trip> trips = new ArrayList<>();
         Cursor cursor = db.query("trips", null, null, null, null, null, null);
 

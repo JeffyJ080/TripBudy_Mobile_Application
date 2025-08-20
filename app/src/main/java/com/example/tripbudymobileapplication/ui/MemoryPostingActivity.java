@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.database.DatabaseHelper;
+import com.example.tripbudymobileapplication.database.dao.MemoryDao;
 import com.example.tripbudymobileapplication.database.model.Memory;
 import com.example.tripbudymobileapplication.utils.BackgroundMusicManager;
 import com.example.tripbudymobileapplication.utils.FileHelper;
@@ -138,7 +139,9 @@ public class MemoryPostingActivity extends AppCompatActivity {
                     ,System.currentTimeMillis()
             );
 
-            // TODO: Add Database code here
+            // Database code
+            MemoryDao memoryDao = new MemoryDao(this);
+            memoryDao.insertMemory(memory);
 
             Toast.makeText(this, "Memory Saved!", Toast.LENGTH_SHORT).show();
             finish();

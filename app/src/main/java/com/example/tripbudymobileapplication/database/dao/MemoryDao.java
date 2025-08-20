@@ -19,18 +19,16 @@ public class MemoryDao {
         db = dbHelper.getWritableDatabase();
     }
 
-    public static Memory insertMemory(Memory m){
+    public void insertMemory(Memory m){
         ContentValues values = new ContentValues();
         values.put("caption", m.getCaption());
         values.put("imgPath", m.getImgPath());
         values.put("mp3Path", m.getMp3Path());
         values.put("datePosted", m.getDatePosted());
         db.insert("memories", null, values);
-
-        return m;
     }
 
-    public static List<Memory> getAllMemories(){
+    public List<Memory> getAllMemories(){
         List<Memory> memories = new ArrayList<>();
         Cursor cursor = db.query("memories", null, null, null, null, null, null);
 

@@ -19,17 +19,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.database.DatabaseHelper;
+import com.example.tripbudymobileapplication.database.dao.MemoryDao;
 import com.example.tripbudymobileapplication.database.model.Memory;
 import com.example.tripbudymobileapplication.utils.BackgroundMusicManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.gridlayout.widget.GridLayout;
 
 public class GalleryActivity extends AppCompatActivity {
 
     private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
-    private ArrayList<Memory> memories = new ArrayList<>();
+    private List<Memory> memories = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +93,8 @@ public class GalleryActivity extends AppCompatActivity {
         BackgroundMusicManager.play(this);
 
         // Populate memories
-        // TODO: Database code here
+        MemoryDao memoryDao = new MemoryDao(this);
+        memories = memoryDao.getAllMemories();
 
         // Gallery Code
         GridLayout galleryGrid = findViewById(R.id.glGallery);

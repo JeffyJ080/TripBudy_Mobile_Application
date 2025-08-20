@@ -20,14 +20,6 @@ public class UserDao {
         db = dbHelper.getWritableDatabase();
     }
 
-    public long insertUser(String username, String email, Integer trips){
-        ContentValues values = new ContentValues();
-        values.put("username", username);
-        values.put("email", email);
-        values.put("trips", trips);
-        return db.insert("users", null, values);
-    }
-
     public User insertUser(User u){
         ContentValues values = new ContentValues();
         values.put("username", u.getUserName());
@@ -36,10 +28,6 @@ public class UserDao {
         db.insert("users", null, values);
 
         return u;
-    }
-
-    public Cursor getAllUsers(){
-        return db.query("users", null, null, null, null, null, null);
     }
 
     public List<User> getALlUsers(){

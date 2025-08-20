@@ -130,7 +130,8 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         btnSaveTrip.setOnClickListener(v -> {
             createTrip();
             btnSaveTrip.setVisibility(View.VISIBLE);
-            Trip savedTrip = TripDao.insertTrip(trip);
+            TripDao tripDao = new TripDao(this);
+            Trip savedTrip = tripDao.insertTrip(trip);
         });
 
         // Database setup
