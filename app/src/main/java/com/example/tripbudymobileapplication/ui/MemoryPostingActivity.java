@@ -5,6 +5,7 @@ import static android.content.Intent.ACTION_OPEN_DOCUMENT;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class MemoryPostingActivity extends AppCompatActivity {
 
     private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
     private ActivityResultLauncher<Intent> pickImageLauncher;
+    private ActivityResultLauncher<Intent> pickMusicLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,10 +108,15 @@ public class MemoryPostingActivity extends AppCompatActivity {
                 return;
             }
 
+            if (selectedMP3Path == null){
+                Toast.makeText(this, "Add a sound file", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Memory memory = new Memory(
                     text
                     ,selectedImagePath
-                    ,"selectedMP3Path" // TODO: You know...
+                    ,selectedMP3Path
                     ,System.currentTimeMillis()
             );
 
@@ -120,18 +127,27 @@ public class MemoryPostingActivity extends AppCompatActivity {
         });
     }
 
-//    public void openSoundPicker(){
-//        // Sound picker code
-//        Intent intent = new Intent(ACTION_OPEN_DOCUMENT);
-//        intent.addCategory(Intent.CATEGORY_OPENABLE);
-//        intent.setType("")
-//    }
-//
-//    String selectedMP3Path;
-//
-//    private void handlePickedSound(Uri uri){
-//
-//    }
+    public void openSoundPicker(){
+        // Sound picker code
+        Intent intent = new Intent(ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("audio/*"); // Any audio file
+
+        pickMusicLauncher.launch(intent);
+    }
+
+    String selectedMP3Path;
+
+    private void handlePickedSound(Uri uri){
+        String relativePath = FileHelper.saveMusicFromUri(this, uri);
+        if (relativePath != null){
+            selectedMP3Path = relativePath;
+
+            File file = new File(getFilesDir(), relativePath);
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, Uri.fromFile(file));
+            mediaPlayer.start();
+        }
+    }
 
     public void openImagePicker(){
         // Image Picker code

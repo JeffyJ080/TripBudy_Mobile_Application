@@ -41,4 +41,30 @@ public class FileHelper {
             return null;
         }
     }
+
+    public static String saveMusicFromUri(Context context, Uri uri){
+        String filename = "music_" + UUID.randomUUID().toString() + ".mp3";
+        File dir = new File(context.getFilesDir(), "music");
+
+        if (!dir.exists()){
+            dir.mkdirs();
+        }
+
+        File outfile = new File(dir, filename);
+
+        try (InputStream in = context.getContentResolver().openInputStream(uri);
+             OutputStream out = new FileOutputStream(outfile)) {
+
+            byte[] buffer = new byte[4096];
+            int len;
+            while ((len = in.read(buffer)) != -1) {
+                out.write(buffer, 0, len);
+            }
+
+            return "music/" + filename; // Relative path for DB
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
