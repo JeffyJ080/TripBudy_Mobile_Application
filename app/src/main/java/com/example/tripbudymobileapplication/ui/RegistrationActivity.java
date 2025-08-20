@@ -3,9 +3,11 @@ package com.example.tripbudymobileapplication.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +23,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
     private SharedPreferences sharedPreferences;
     String email, username;
+    private TextView txt1, txt2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,34 +79,56 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
         sharedPreferences = getSharedPreferences("userdata", MODE_PRIVATE);
+        txt1 = findViewById(R.id.textView);
+        txt2 = findViewById(R.id.textView2);
 
         // Login code
         Button btnLogin = findViewById(R.id.btnLogin);
         EditText edtUsername = findViewById(R.id.edtUsername);
         EditText edtEmail = findViewById(R.id.edtEmail);
 
-        btnLogin.setOnClickListener(v -> {
-            if (edtEmail.getText().toString().isEmpty()){
-                Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-                return;
-            } else {
-                email = edtEmail.getText().toString();
-            }
+        if (!sharedPreferences.getBoolean("loggedin", false)) {
+            // Activity setup
+            edtUsername.setVisibility(View.VISIBLE);
+            edtEmail.setVisibility(View.VISIBLE);
+            txt1.setVisibility(View.VISIBLE);
+            txt2.setVisibility(View.VISIBLE);
+            btnLogin.setText("Login");
 
-            if (edtUsername.getText().toString().isEmpty()){
-                Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
-                return;
-            } else{
-                username = edtUsername.getText().toString();
-            }
+            // Login logic
+            btnLogin.setOnClickListener(v -> {
+                if (edtEmail.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    email = edtEmail.getText().toString();
+                }
 
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("username", username);
-            editor.putString("email", email);
-            editor.putInt("id", 1); // TODO: Database code
-            editor.putBoolean("loggedin", true);
-            editor.apply();
-        });
+                if (edtUsername.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    username = edtUsername.getText().toString();
+                }
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("username", username);
+                editor.putString("email", email);
+                editor.putInt("id", 1); // TODO: Database code
+                editor.putBoolean("loggedin", true);
+                editor.apply();
+            });
+        } else{
+            // Activity setup
+            edtUsername.setVisibility(View.INVISIBLE);
+            edtEmail.setVisibility(View.INVISIBLE);
+            txt1.setVisibility(View.INVISIBLE);
+            txt2.setVisibility(View.INVISIBLE);
+
+            // Actual logout logic
+            btnLogin.setText("Logout");
+            btnLogin.setOnClickListener(v -> logout());
+        }
 
     }
 
@@ -111,6 +136,7 @@ public class RegistrationActivity extends AppCompatActivity {
         if (sharedPreferences.getBoolean("loggedin", true)) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
+            editor.putBoolean("loggedin", false);
             editor.apply();
         }
     }
