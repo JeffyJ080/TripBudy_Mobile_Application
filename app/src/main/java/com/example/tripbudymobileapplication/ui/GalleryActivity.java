@@ -96,10 +96,16 @@ public class GalleryActivity extends AppCompatActivity {
             // Imageview
             ImageView view = new ImageView(this);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            container.setOnClickListener(v -> {
+                Intent intent = new Intent(GalleryActivity.this, MemoryPlayerActivity.class);
+                intent.putExtra("imgPath", m.getImgPath());
+                intent.putExtra("mp3Path", m.getMp3Path());
+                intent.putExtra("caption", m.getCaption());
+                startActivity(intent);
+            });
 
             // Load the image
-            File file = new File(getFilesDir(), m.getImgPath());
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            Bitmap bitmap = BitmapFactory.decodeFile(m.getImgPath());
             if (bitmap != null){
                 view.setImageBitmap(bitmap);
             } else{

@@ -29,6 +29,10 @@ public class Memory {
         return imgPath;
     }
 
+    public String getMp3Path() {
+        return mp3Path;
+    }
+
     public Long getDatePosted() {
         return datePosted;
     }
