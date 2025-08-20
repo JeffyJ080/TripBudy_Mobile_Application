@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,8 +79,11 @@ public class GalleryActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         });
 
+        // Populate memories
+        // TODO: Database code here
+
         // Gallery Code
-        GridLayout grid = findViewById(R.id.glGallery);
+        GridLayout galleryGrid = findViewById(R.id.glGallery);
 
         for (Memory m :
                 memories) {
@@ -102,7 +107,26 @@ public class GalleryActivity extends AppCompatActivity {
             }
 
             // Caption textview
+            TextView text = new TextView(this);
+            text.setText(m.getCaption());
+            text.setGravity(Gravity.CENTER);
+            text.setTextSize(14);
 
+            // Layout parameters for image
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            int sizeInDP = 150;
+            int px = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, sizeInDP, getResources().getDisplayMetrics());
+            params.width = px;
+            params.height = px;
+            view.setLayoutParams(params);
+
+            // Add views to container
+            container.addView(view);
+            container.addView(text);
+
+            // Add container to galleryGrid
+            galleryGrid.addView(container);
         }
     }
 }
