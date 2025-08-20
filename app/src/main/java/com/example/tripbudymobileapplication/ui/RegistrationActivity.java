@@ -1,8 +1,12 @@
 package com.example.tripbudymobileapplication.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +19,8 @@ import com.example.tripbudymobileapplication.R;
 public class RegistrationActivity extends AppCompatActivity {
 
     private ImageButton btnTrips, btnHome, btnAddMem, btnViewMemory, btnAccount;
+    private SharedPreferences sharedPreferences;
+    String email, username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,5 +74,44 @@ public class RegistrationActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
             finish();
         });
+
+        sharedPreferences = getSharedPreferences("userdata", MODE_PRIVATE);
+
+        // Login code
+        Button btnLogin = findViewById(R.id.btnLogin);
+        EditText edtUsername = findViewById(R.id.edtUsername);
+        EditText edtEmail = findViewById(R.id.edtEmail);
+
+        btnLogin.setOnClickListener(v -> {
+            if (edtEmail.getText().toString().isEmpty()){
+                Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                email = edtEmail.getText().toString();
+            }
+
+            if (edtUsername.getText().toString().isEmpty()){
+                Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
+                return;
+            } else{
+                username = edtUsername.getText().toString();
+            }
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("username", username);
+            editor.putString("email", email);
+            editor.putInt("id", 1); // TODO: Database code
+            editor.putBoolean("loggedin", true);
+            editor.apply();
+        });
+
+    }
+
+    private void logout(){
+        if (sharedPreferences.getBoolean("loggedin", true)) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+        }
     }
 }
