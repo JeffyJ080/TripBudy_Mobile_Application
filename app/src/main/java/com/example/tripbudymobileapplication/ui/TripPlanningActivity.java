@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tripbudymobileapplication.R;
 import com.example.tripbudymobileapplication.database.DatabaseHelper;
+import com.example.tripbudymobileapplication.database.dao.TripDao;
 import com.example.tripbudymobileapplication.database.model.Trip;
 import com.example.tripbudymobileapplication.database.model.User;
 
@@ -129,7 +130,7 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
         btnSaveTrip.setOnClickListener(v -> {
             createTrip();
             btnSaveTrip.setVisibility(View.VISIBLE);
-            Trip.saveTrip(trip);
+            Trip savedTrip = TripDao.insertTrip(trip);
         });
 
         // Database setup
@@ -162,11 +163,11 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
 
         // Start Date Input
         String sD = edtStartDate.getText().toString();
-        Date startDate = null;
+        Long startDate = null;
 
         if (!edtStartDate.getText().toString().isEmpty()){
             try {
-                startDate = Date.valueOf(sD);
+                startDate = Long.parseLong(sD);
             } catch (Exception e) {
                 Toast.makeText(this, "Enter a valid format: yyyy/mm/dd", Toast.LENGTH_LONG).show();
             }
@@ -177,11 +178,11 @@ public class TripPlanningActivity extends AppCompatActivity implements AdapterVi
 
         // End Date Input
         String eD = edtEndDate.getText().toString();
-        Date endDate = null;
+        Long endDate = null;
 
         if (!edtEndDate.getText().toString().isEmpty()) {
             try{
-                endDate = Date.valueOf(eD);
+                endDate = Long.parseLong(eD);
             } catch (Exception e) {
                 Toast.makeText(this, "Enter a valid format: yyyy/mm/dd", Toast.LENGTH_LONG).show();
             }
